@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{%  block body %}
+
+<div class="container">
+  <div class="jumbotron">
+    <h4>Editar Empresa</h4>
+    <form action="/updateempresa/{{empresa.0}}" class="form-group" method="POST">
+      <div class="form-group">
+        <input type="text" name="empresa" class="form-control" placeholder="Empresa *" autofocus required value="{{empresa.1}}">
+      </div>
+      <div class="form-group">
+        <input type="text" name="direccion" class="form-control" placeholder="Direccion" value="{{empresa.2}}">
+      </div>
+      <div class="form-group">
+        <input type="email" name="email" class="form-control" placeholder="Email" value="{{empresa.3}}">
+      </div>
+      <div class="form-group">
+        <input type="text" name="telefono" class="form-control" placeholder="Telefono" value="{{empresa.4}}">
+      </div>
+
+      <button class="btn btn-primary btn-lg btn-block" type="submit">Guardar y volver</button>
+    </form>
+  </div>
+</div>
+<div class="container">
+  <table class="table table-striped table-hover table-bordered table-sm bg-white">
+    <thead>
+      <tr>
+        <td>ID</td>
+        <td>Empresa</td>
+        <td>Direccion</td>
+        <td>Email</td>
+        <td>Teléfono</td>
+        <td>Selección</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for empresa in empresas %}
+      <tr>
+        <td>{{empresa.0}}</td>
+        <td>{{empresa.1}}</td>
+        <td>{{empresa.2}}</td>
+        <td>{{empresa.3}}</td>
+        <td>{{empresa.4}}</td>
+        <td>
+          <a href="/edit/{{empresa.0}}" class="btn btn btn-outline-primary btn-sm">Editar</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+</div>
+{% endblock %}

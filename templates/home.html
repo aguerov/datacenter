@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block head %}
+    <meta http-equiv="refresh" content="60">
+{% endblock %}
+
+{%  block body %}
+
+<h4>Fecha de hoy: {{fecha}}</h4>
+<div class="table-responsive">
+  <table class="table table-striped table-hover table-bordered table-sm bg-white">
+    <thead>
+      <tr>
+
+        <td><b>User</b></td>
+        <td><b>Empresa</b></td>
+        <td><b>Nombre</b></td>
+        <td><b>Rut</b></td>
+        <td><b>Motivo</b></td>
+        <td><b>Entrada</b></td>
+        <td><b>Salida</b></td>
+        <td><b>Pendiente</b></td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for visita in visitas %}
+      <tr>
+        <td>{{visita.nom_user}}</td>
+
+        <td>{{visita.nom_empresa}}</td>
+        <td>{{visita.nombre_guest}} {{ visita.apellidos}}</td>
+        <td>{{visita.rut_guest}}</td>
+        <td>{{visita.motivo}}</td>
+        <td>{{visita.entrada}}</td>
+        <td>{{visita.salida}}</td>
+
+        <td>
+          {% if session['id_user'] == visita.id_user %}
+          {% if visita.salida %}
+          <a href="#" class="btn btn-outline-secondary btn-sm">Salida Marcada</a>
+          {% else %}
+          <a href="/validarut" class="btn btn-outline-primary btn-sm"> Entrada </>
+            <a href="/salida/{{visita.id}}" class="btn btn-outline-danger btn-sm"> Salida </a>
+            {% endif %}
+            {% else %}
+            {% if visita.salida %}
+            <a href="#" class="btn btn-outline-secondary btn-sm">Salida Marcada</a>
+            {% else %}
+            <a href="/login" class="btn btn-danger btn-sm"> Marcar Salida </a>
+            {% endif %}
+            {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+{% endblock %}

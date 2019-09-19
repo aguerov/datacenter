@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{%  block body %}
+
+<div class="container">
+    <div class="jumbotron">
+
+        <h4>Ingreso persona al Data <small><a href="/">o Solo ir a la Planilla de Control</p> </a> </small> </h4>
+
+            <form action="/rutdv" class="form-group" method="POST">
+                <div class="form-group">
+                    <input type="text" name="rut" autofocus class="form-control" placeholder="Rut" required
+                        value="{{ rutdv }}">
+                </div>
+
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+            </form>
+    </div>
+</div>
+
+{% endblock %}

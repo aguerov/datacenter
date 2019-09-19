@@ -1,0 +1,11 @@
+body {
+ margin: 0;
+  padding: 0;
+  background: url(../img/bg.jpeg) no-repeat center top;
+  background-size: cover;
+  font-family: sans-serif;
+  height: 100vh;
+}
+.container {
+  background-color: rgba(207, 207, 224, 0.904); opacity: 0.9;
+}

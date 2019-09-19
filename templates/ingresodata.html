@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+{%  block body %}
+<nav class="container">
+    <div class="card card-body">
+        {% if empresa %}
+        <form action="/" method="POST">
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="inputEmail4">RUN</label>
+                    <input type="text" class="form-control" required name="rut" placeholder="rut" value={{rutdv}}
+                        disabled>
+                </div>
+                <div class="form-group col-md-4">
+
+                    <label for="inputCity">Empresa </label>
+                    
+                    <input type="text" class="form-control" value={{empresa}} name="empresa" {{ dis }}>
+                    
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="inputCity">Nombre</label>
+                    <input type="text" autofocus class="form-control" name="nombre_guest" required value={{nombre}}
+                        {{ dis }}>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="inputCity">Apellidos</label>
+                    <input type="text" class="form-control" name="apellidos" required value={{apellidos}} {{ dis }}>
+                </div>
+
+            </div>  
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="inputState">Tipo de Motivo <a href="">Ingresa</a> </label>
+                        <select id="inputState" class="form-control" {{ autof }} required name="tipo">
+                            <option value=0 selected>Otros...</option>
+                            <option value=1>Hardware</option>
+                            <option value=2>Software</option>
+                            <option value=3>Comunicaciones</option>
+                            <option value=4>Trabajos Programados</option>
+                            <option value=5>Inspección</option>
+                            
+                        </select>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="inputCity">Motivo</label>
+                        <input type="text" class="form-control" name="motivo" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputZip">Fecha</label>
+                        <input type="date" required class="form-control" name="fecha" value="{{ fecha }}">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputZip">Hora Ingreso</label>
+
+                        <input type="time" class="form-control" name="hora_ingreso" value="{{ hora }}">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputZip">Hora Salida</label>
+                        <input type="time" class="form-control" name="hora_salida">
+
+                    </div>
+
+                </div>
+
+
+                {% else %}
+                <form action="/guest" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="inputEmail4">RUN</label>
+                            <input type="text" class="form-control" required name="rut" placeholder="rut"
+                                value={{rutdv}} disabled>
+                        </div>
+                        <div class="form-group col-md-4">
+
+                            <label for="inputCity">Empresa <a href="/empresav">Ingresa </a> </label>
+
+                            <select id="id_empresa" {{ dis }} class="form-control" name="empresa">
+                                {% for empresa in empresas %}
+                                <option value={{empresa.0}}> {{empresa.1}} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputCity">Nombre</label>
+                            <input type="text" autofocus class="form-control" name="nombre_guest" required
+                                 {{ dis }}>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputCity">Apellidos</label>
+                            <input type="text" class="form-control" name="apellidos" required {{ dis }}>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block">Registro</button>
+                    </div>
+
+                </form>
+            
+</nav>
+
+{% endblock %}
