@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from itertools import cycle
 from flask_mysqldb import MySQL, MySQLdb
+from flask_login import LoginManager, login_user, logout_user
+from datetime import timedelta
 import bcrypt
 import datetime
 
@@ -377,7 +379,11 @@ def logout():
     return redirect(url_for('home'))
 
 
+@app.before_request
+def before_request():
+    session.permanent = True
+    app.permanent_session_lifetime = timedelta(seconds=40)
+
 if __name__ == '__main__':
     app.secret_key = "^A%DJAJU^JJ123"
     app.run(debug=True)
-    app.SESSION_INACTIVITY_TIMEOUT_IN_SECONDS = 10
