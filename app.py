@@ -15,8 +15,9 @@ app.config['MYSQL_DB'] = 'flaskdb'
 #app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 mysql = MySQL(app)
 
-@app.route('/salida/<id>', methods = ['POST', 'GET'])
+@app.route('/sal/<id>', methods = ['POST', 'GET'])
 def salida(id):
+    
     dt = datetime.datetime.now()
     solohora = dt.hour
     solominuto = dt.minute
@@ -25,8 +26,9 @@ def salida(id):
     if solominuto < 10:
         solominuto = ("0%s" % (solominuto))
     hora = ("{}:{}".format(solohora, solominuto))
+    
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM visita WHERE id = %s', (id))
+    cur.execute('SELECT * FROM visita WHERE id = %s', (id,) )
     data = cur.fetchone()
     cur.close()
     
@@ -73,6 +75,7 @@ def home():
         if solomes < 10:
             solomes = ("0%s" % (solomes))
         fecha = ("{}-{}-{}".format(dt.year, solomes, solodia))
+        fecha2 = ("{}-{}-{}".format(solodia, solomes, dt.year))
         
         cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cur.execute("SELECT * FROM visita WHERE fecha=%s", (fecha,))
@@ -118,7 +121,7 @@ def home():
             visita["nom_empresa"] = nom_empresa
             visita["nom_user"] = nom_user 
         
-        return render_template('home.html', visitas=visitas, fecha = fecha )
+        return render_template('home.html', visitas=visitas, fecha = fecha, fecha2= fecha2 )
 
 
 
@@ -263,7 +266,7 @@ def empresav():
 @app.route('/edit/<id>', methods = ['POST', 'GET'])
 def get_contact(id):
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM empresa WHERE id_empresa = %s', (id))
+    cur.execute('SELECT * FROM empresa WHERE id_empresa = %s', (id,))
     data = cur.fetchall()
     cur.close()
     print(data[0])

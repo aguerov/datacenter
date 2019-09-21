@@ -5,7 +5,7 @@
 
 {%  block body %}
 
-<h4>Fecha de hoy: {{fecha}}</h4>
+<h4>Fecha de hoy: {{fecha2}}</h4>
 <div class="table-responsive">
   <table class="table table-striped table-hover table-bordered table-sm bg-white">
     <thead>
@@ -36,14 +36,14 @@
         <td>
           {% if session['id_user'] == visita.id_user %}
           {% if visita.salida %}
-          <a href="#" class="btn btn-outline-secondary btn-sm">Salida Marcada</a>
+          <a href="#" class="btn btn-outline-secondary btn-sm" >Salida Marcada</a>
           {% else %}
-          <a href="/validarut" class="btn btn-outline-primary btn-sm"> Entrada </>
-            <a href="/salida/{{visita.id}}" class="btn btn-outline-danger btn-sm"> Salida </a>
+            <a href="/validarut" class="btn btn-outline-primary btn-sm"> Entrada </a>
+            <a href="/sal/{{visita.id}}" class="btn btn-outline-danger btn-sm"> Salida </a>
             {% endif %}
             {% else %}
             {% if visita.salida %}
-            <a href="#" class="btn btn-outline-secondary btn-sm">Salida Marcada</a>
+            <a href="#" class="btn btn-outline-secondary btn-sm" >Salida Marcada</a>
             {% else %}
             <a href="/login" class="btn btn-danger btn-sm"> Marcar Salida </a>
             {% endif %}
